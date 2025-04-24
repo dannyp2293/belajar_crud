@@ -54,6 +54,7 @@
     </nav>
     <div class="container">
         <form method="POST" action="proses.php" enctype="multipart/form-data">
+            <input type="hidden" value=<?php echo $id_siswa; ?> " name="id_siswa">
             <div class="mb-3 row">
                 <label for="nisn"
                     class="col-sm-2 col-form-label">NISN</label>

@@ -1,31 +1,11 @@
 <?php
-include 'koneksi.php';
+include 'fungsi.php';
 
 if (isset($_POST['aksi'])) {
     if ($_POST['aksi'] == "add") {
 
-        // var_dump($_POST);
-        // var_dump($_FILES);
-        // echo $_FILES['foto']['type'];
-        // die();
+        tambah_data($_POST, $_FILES);
 
-
-        $nisn = $_POST['nisn'];
-        $nama_siswa = $_POST['nama_siswa'];
-        $jenis_kelamin = $_POST['jenis_kelamin'];
-        $foto = $_FILES['foto']['name'];
-        //  $foto = "img5.jpg";
-        $alamat = $_POST['alamat'];
-
-        $dir = "img/";
-        $tmpFile = $_FILES['foto']['tmp_name'];
-
-        move_uploaded_file($tmpFile, $dir . $foto);
-
-        // die();
-
-        $query = "INSERT INTO tb_siswa value(null, '$nisn', '$nama_siswa', '$jenis_kelamin', '$foto', '$alamat')";
-        $sql = mysqli_query($conn, $query);
 
         if ($sql) {
             header("location: index.php");
@@ -33,8 +13,6 @@ if (isset($_POST['aksi'])) {
         } else {
             echo $query;
         }
-
-        //  echo $nisn." | ".$nama_siswa." | ".$jenis_kelamin." | ".$foto." | ".$alamat;
 
         echo "<br>Tambah Data <a href='index.php'>[Home]</a>";
     } else if ($_POST['aksi'] == "edit") {

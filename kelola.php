@@ -83,10 +83,10 @@
             </div>
             <div class="mb-3 row">
                 <label for="foto"
-                    class="col-sm-2 col-form-label">Foto Siwa</label>
+                    class="col-sm-2 col-form-label">Foto Siswa</label>
                 <div class="col-sm-10">
 
-                    <input required class="form-control" type="file" name="foto" id="foto" accept="image/*">
+                    <input <?php if(!isset($_GET['ubah'])){ echo "required";} ?>  class="form-control" type="file" name="foto" id="foto" accept="image/*">
                     <!-- accept="image/*"  unutk opsi jenis file yg di tampilkan -->
                 </div>
             </div>

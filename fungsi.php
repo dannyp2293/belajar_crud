@@ -6,7 +6,11 @@ function tambah_data($data, $files)
     $nisn = $data['nisn'];
     $nama_siswa = $data['nama_siswa'];
     $jenis_kelamin = $data['jenis_kelamin'];
-    $foto = $files['foto']['name'];
+
+    $split = explode('.', $files['foto']['name']);
+    $ekstensi = $split[count($split) - 1];
+
+    $foto = $nisn . '.' . $ekstensi;
     $alamat = $data['alamat'];
 
     $dir = "img/";
@@ -35,9 +39,12 @@ function ubah_data($data, $files)
     if ($files['foto']['name'] == "") {
         $foto = $result['foto_siswa'];
     } else {
-        $foto = $files['foto']['name'];
+        $split = explode('.', $files['foto']['name']);
+        $ekstensi = $split[count($split) - 1];
+
+        $foto = $result['nisn'].'.'.$ekstensi;
         unlink("img/" . $result['foto_siswa']);
-        move_uploaded_file($files['foto']['tmp_name'], 'img/' . $files['foto']['name']);
+        move_uploaded_file($files['foto']['tmp_name'], 'img/' .$foto);
     }
 
     $query = "UPDATE tb_siswa SET nisn='$nisn', nama_siswa='$nama_siswa', jenis_kelamin='$jenis_kelamin', alamat='$alamat', foto_siswa ='$foto'  WHERE id_siswa='$id_siswa';";
@@ -46,7 +53,8 @@ function ubah_data($data, $files)
     return true;
 }
 
-function hapus_data($data,){
+function hapus_data($data,)
+{
     $id_siswa = $data['hapus'];
 
     $queryShow = "SELECT * FROM tb_siswa WHERE id_siswa  = '$id_siswa';";
@@ -55,13 +63,10 @@ function hapus_data($data,){
 
     // var_dump($result);
 
-    unlink("img/".$result['foto_siswa']);
+    unlink("img/" . $result['foto_siswa']);
     // die();
 
     $query = "DELETE FROM tb_siswa WHERE id_siswa = '$id_siswa';";
     $sql = mysqli_query($GLOBALS['conn'], $query);
     return true;
-
 }
-
-?>
